@@ -1,7 +1,7 @@
 <?php
 
     $currentDirectory = getcwd();
-    $uploadDirectory = "/folder/";
+    $uploadDirectory = "/upload/";
     $errors = []; // Store errors here
     $return = "";
 
@@ -13,27 +13,29 @@
     $fileType = $_FILES['pdf']['type'];
     $fileExtension = strtolower(end(explode('.',$fileName)));
     
-    $uploadPath = $currentDirectory . $uploadDirectory . basename($fileName); 
+    $nome =  substr(md5(rand().$fileName.rand()), 0, 6).'.'.$fileExtension;
+
+    $uploadPath = $currentDirectory . $uploadDirectory . basename($nome); 
     if (isset($_FILES['pdf'])) {
       if (! in_array($fileExtension,$fileExtensionsAllowed)) {
-        $errors[] = "This file extension is not allowed. Please upload a PDF file";
+        $errors[] = "Extensão não permitida. Por favor, envie um arquivo pdf.";
       }
 
       if ($fileSize > 20000000) {
-        $errors[] = "File exceeds maximum size (20MB)";
+        $errors[] = "O arquivo excede o limite de 20MB";
       }
      
       if (empty($errors)) {
         $didUpload = move_uploaded_file($fileTmpName, $uploadPath);
        
         if ($didUpload) {
-          $return = "The file " . basename($fileName) . " has been uploaded";
+          $return = "O arquivo " . basename($fileName) . " Foi enviado";
         } else {
-          $return = "An error occurred. Please contact the administrator.";
+          $return = "Houve um erro no envio do arquivo.$uploadPath";
         }
       } else {
         foreach ($errors as $error) {
-          $return += $error . "These are the errors" . "\n";
+          $return += $error . "Erros" . "\n";
         }
       }
 
@@ -150,13 +152,17 @@
       .file-upload-button:hover {
         background-color: #cccccc;
       }
+      #alerta {
+        color:red;
+        margin-top:30px
+      }
     </style>
   </head>
 
-  <body translate="no">
+  <body>
     <h1>Assinador de PDF <span>Para certificados eletrônicos</span></h1>
 
-    <p style="color:red"><?=$return?></p>
+    <p id="alerta"><?=$return?></p>
     <form
       method="POST"
       enctype="multipart/form-data"
