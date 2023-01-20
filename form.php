@@ -15,24 +15,25 @@
       method="POST"
       enctype="multipart/form-data"
     >
+    <br />
       <div class="custom-file-upload">
         <label for="file">Arquivo PDF: </label>
         <input
           type="file"
-          id="pdf"
           name="pdf"
           accept="application/pdf"
           required
         />
       </div>
-      <br />
       <p class="alerta"><?= $errors['pdf'] ?></p>
-      <!--div class="custom-file-upload">
+      <br />
+      <div class="custom-file-upload">
         <label for="file">Assinatura eletrônica: </label>
-        <input type="file" id="assinatura" name="assinatura" />
-      </div-->
+        <input type="file" name="p12" />
+      </div>
+      <p class="alerta"><?= $errors['p12'] ?></p>
 
-      <input type="submit" value="Enviar" />
+      <input type="submit" class="file-upload-button submit" value="Enviar" />
     </form>
     <script src="assets/tools/jquery-3.5.1.min.js"></script>
     <script src="assets/form.js"></script>
