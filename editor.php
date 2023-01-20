@@ -1,3 +1,6 @@
+<?php
+if(count(get_included_files()) ==1) exit("Direct access not permitted.");
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
@@ -207,6 +210,6 @@
     <script src="../assets/tools/prettify-r298.min.js"></script>
     <script src="../assets/tools/arrow.fabric.js"></script>
     <script src="../assets/tools/pdfannotate.js"></script>
-    <script src="../assets/editor-script.js"></script>
+    <script src="../assets/editor.js"></script>
   </body>
 </html>
