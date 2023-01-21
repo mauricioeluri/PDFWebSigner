@@ -1,5 +1,6 @@
-<?php if(count(get_included_files()) ==1) exit("Direct access not permitted."); ?>
-<!DOCTYPE html>
+<?php
+defined('BASEPATH') OR exit('Acesso direto não permitido');
+?><!DOCTYPE html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
