@@ -8,9 +8,8 @@
     <link rel="stylesheet" href="assets/form.css" />
   </head>
 
-  <body translate="no">
+  <body>
     <h1>Assinador de PDF <span>Para certificados eletrônicos</span></h1>
-
     <form
       method="POST"
       enctype="multipart/form-data"
@@ -18,20 +17,15 @@
     <br />
       <div class="custom-file-upload">
         <label for="file">Arquivo PDF: </label>
-        <input
-          type="file"
-          name="pdf"
-          accept="application/pdf"
-          required
-        />
+        <input type="file" name="pdf" accept="application/pdf" required />
       </div>
-      <p class="alerta"><?= $errors['pdf'] ?></p>
+      <p class="alerta"><?=$status['pdf']['info'].$status['pdf']['errors']?></p>
       <br />
       <div class="custom-file-upload">
         <label for="file">Assinatura eletrônica: </label>
-        <input type="file" name="p12" />
+        <input type="file" name="p12" accept="application/x-pkcs12" required/>
       </div>
-      <p class="alerta"><?= $errors['p12'] ?></p>
+      <p class="alerta"><?=$status['p12']['info'].$status['p12']['errors']?></p>
 
       <input type="submit" class="file-upload-button submit" value="Enviar" />
     </form>
