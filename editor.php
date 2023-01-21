@@ -1,6 +1,4 @@
-<?php
-if(count(get_included_files()) ==1) exit("Direct access not permitted.");
-?>
+<?php if(count(get_included_files()) ==1) exit("Direct access not permitted."); ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
@@ -11,7 +9,7 @@ if(count(get_included_files()) ==1) exit("Direct access not permitted.");
       href="../assets/img/ico.png"
     />
     <title>Editor do Assinador de PDF</title>
-    <link rel="stylesheet" href="../assets/tools/bootstrap-4.4.1.min.css" />
+    <link rel="stylesheet" href="assets/tools/bootstrap-4.4.1.min.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -19,9 +17,9 @@ if(count(get_included_files()) ==1) exit("Direct access not permitted.");
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="../assets/tools/prettify-r298.min.css" />
-    <link rel="stylesheet" href="../assets/editor.css" />
-    <link rel="stylesheet" href="../assets/tools/pdfannotate.css" />
+    <link rel="stylesheet" href="assets/tools/prettify-r298.min.css" />
+    <link rel="stylesheet" href="assets/editor.css" />
+    <link rel="stylesheet" href="assets/tools/pdfannotate.css" />
   </head>
   <body>
     <div class="toolbar">
@@ -123,7 +121,7 @@ if(count(get_included_files()) ==1) exit("Direct access not permitted.");
         </button>
       </div>
     </div>
-    <div id="pdf-container"></div>
+    <div id="pdf-container" ar-pdf="<?=$status['pdf']['filename']?>"></div>
     <!-- JSON File -->
     <!-- 
 <div class="modal fade" id="dataModal" tabindex="-1" role="dialog" aria-labelledby="dataModalLabel" aria-hidden="true">
@@ -187,7 +185,7 @@ if(count(get_included_files()) ==1) exit("Direct access not permitted.");
     </div>
     <div class="tool">
       <img
-        src="../assets/img/assinatura.png"
+        src="assets/img/assinatura.png"
         alt="Assinatura"
         class="nkar"
         hidden
@@ -195,21 +193,21 @@ if(count(get_included_files()) ==1) exit("Direct access not permitted.");
       />
     </div>
     <!-- Signature Script -->
-    <script src="../assets/tools/signature_pad.umd.js"></script>
-    <script src="../assets/tools/jquery-3.5.1.min.js"></script>
-    <script src="../assets/tools/popper-1.16.1.min.js"></script>
-    <script src="../assets/tools/bootstrap-4.5.2.min.js"></script>
-    <script src="../assets/tools/pdf-2.6.347.min.js"></script>
+    <script src="assets/tools/signature_pad.umd.js"></script>
+    <script src="assets/tools/jquery-3.5.1.min.js"></script>
+    <script src="assets/tools/popper-1.16.1.min.js"></script>
+    <script src="assets/tools/bootstrap-4.5.2.min.js"></script>
+    <script src="assets/tools/pdf-2.6.347.min.js"></script>
     <script>
       pdfjsLib.GlobalWorkerOptions.workerSrc =
-        "../assets/tools/pdf.worker-2.6.347.min.js";
+        "assets/tools/pdf.worker-2.6.347.min.js";
     </script>
-    <script src="../assets/tools/fabric-4.3.0.min.js"></script>
-    <script src="../assets/tools/jspdf.umd-2.2.0.min.js"></script>
-    <script src="../assets/tools/run_prettify.js"></script>
-    <script src="../assets/tools/prettify-r298.min.js"></script>
-    <script src="../assets/tools/arrow.fabric.js"></script>
-    <script src="../assets/tools/pdfannotate.js"></script>
-    <script src="../assets/editor.js"></script>
+    <script src="assets/tools/fabric-4.3.0.min.js"></script>
+    <script src="assets/tools/jspdf.umd-2.2.0.min.js"></script>
+    <script src="assets/tools/run_prettify.js"></script>
+    <script src="assets/tools/prettify-r298.min.js"></script>
+    <script src="assets/tools/arrow.fabric.js"></script>
+    <script src="assets/tools/pdfannotate.js"></script>
+    <script src="assets/editor.js"></script>
   </body>
 </html>

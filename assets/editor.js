@@ -1,4 +1,5 @@
-var pdfFileName = "upload/sample2.pdf";
+var pdfFileName = "upload/" + $("#pdf-container").attr("ar-pdf");
+
 var pdf = new PDFAnnotate("pdf-container", pdfFileName, {
   onPageUpdated(page, oldData, newData) {
     //Vesrion  Update

@@ -3,8 +3,17 @@
   if (isset($_FILES['pdf']) || isset($_FILES['p12'])) {
     $status['pdf'] = upload_file('pdf');
     $status['p12'] = upload_file('p12');
+
+    //Se o envio das duas variáveis for um sucesso
+    if (!empty($status['pdf']['filename']) &&
+        !empty($status['pdf']['filename'])) {
+      require 'editor.php';
+    } else {
+      require 'form.php';
+    }
+  } else {
+    require 'form.php';
   }
-  require 'form.php';
 
   function upload_file($fileType = ''){
     $uploadDirectory = getcwd().'/upload/';
