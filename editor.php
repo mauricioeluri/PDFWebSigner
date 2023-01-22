@@ -8,7 +8,7 @@ if(count(get_included_files()) ==1) exit('Acesso direto não permitido');
     <link
       rel="shortcut icon"
       type="image/x-icon"
-      href="../assets/img/ico.png"
+      href="assets/img/ico.png"
     />
     <title>Editor do Assinador de PDF</title>
     <link rel="stylesheet" href="assets/tools/bootstrap-4.4.1.min.css" />
@@ -77,11 +77,11 @@ if(count(get_included_files()) ==1) exit('Acesso direto não permitido');
       </div>
       <div class="tool">
 		<button class="tool-button"><i class="fas fa-long-arrow-right" title="Add Arrow" onclick="enableAddArrow(event)"></i></button>
-	</div>
+</div>
 	<div class="tool">
 		<button class="tool-button"><i class="fas fa-square" title="Add rectangle" onclick="enableRectangle(event)"></i></button>
-	</div-->
-      <!--div class="tool">
+	</div>
+      <-div class="tool">
         <button class="tool-button">
           <i
             class="fa fa-image"
@@ -102,13 +102,16 @@ if(count(get_included_files()) ==1) exit('Acesso direto não permitido');
       <!--div class="tool">
 		<button class="tool-button" id="modalBtnSign"><i class="fas fa-signature" title="Add an Sign" onclick="showSignModal()"></i></button>
 	</div-->
-      <div class="tool">
+  <div class="tool">
         <button
           class="btn btn-danger btn-sm"
           onclick="deleteSelectedObject(event)"
         >
           <i class="fa fa-trash"></i>
         </button>
+      </div>
+      <div class="tool">
+        <p id="ar-pyh">Insira a assinatura para obter informações dos comandos do pyhanko.</p>
       </div>
       <!--div class="tool">
 		<button class="btn btn-danger btn-sm" onclick="clearPage()">Clear Page</button>
@@ -209,7 +212,7 @@ if(count(get_included_files()) ==1) exit('Acesso direto não permitido');
     <script src="assets/tools/run_prettify.js"></script>
     <script src="assets/tools/prettify-r298.min.js"></script>
     <script src="assets/tools/arrow.fabric.js"></script>
-    <script src="assets/tools/pdfannotate.js"></script>
+    <script src="assets/pdfannotate.js"></script>
     <script src="assets/editor.js"></script>
   </body>
 </html>

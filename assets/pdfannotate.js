@@ -56,6 +56,7 @@ var PDFAnnotate = function (container_id, url, options = {}) {
   this.initFabric = function () {
     var inst = this;
     let canvases = $("#" + inst.container_id + " canvas");
+
     canvases.each(function (index, el) {
       var background = el.toDataURL("image/png");
       var fabricObj = new fabric.Canvas(el.id, {
@@ -84,6 +85,7 @@ var PDFAnnotate = function (container_id, url, options = {}) {
       $(fabricObj.upperCanvasEl).click(function (event) {
         inst.active_canvas = index;
         inst.fabricClickHandler(event, fabricObj);
+        attSignatureVal(fabricObj._objects[0], index);
       });
       fabricObj.on("after:render", function () {
         inst.fabricObjectsData[index] = fabricObj.toJSON();
@@ -98,6 +100,7 @@ var PDFAnnotate = function (container_id, url, options = {}) {
       }
     });
   };
+
   // Click add Text
   this.fabricClickHandler = function (event, fabricObj) {
     var inst = this;
@@ -115,7 +118,7 @@ var PDFAnnotate = function (container_id, url, options = {}) {
       inst.active_tool = 0;
     } else if (inst.active_tool == 3) {
       let image = new Image();
-      image.src = "assinatura.png";
+      image.src = "assets/img/assinatura.png";
       var imgElement = document.querySelector(".nkar");
       let imgCheck = new fabric.Image(imgElement, {
         left:
@@ -128,6 +131,25 @@ var PDFAnnotate = function (container_id, url, options = {}) {
       $(".nkar").attr("ar-ativo", "1");
     }
   };
+};
+
+this.attSignatureVal = function (fabricObj, index) {
+  var coordenadas = {
+    pag: index + 1,
+    esq: fabricObj["aCoords"]["bl"]["x"].toFixed(2),
+    bai: fabricObj["aCoords"]["bl"]["y"].toFixed(2),
+    dir: fabricObj["aCoords"]["tr"]["x"].toFixed(2),
+    cim: fabricObj["aCoords"]["tr"]["y"].toFixed(2),
+  };
+
+  $("#ar-pyh").text(
+    `Info sobre a assinatura:
+    Pág: ${coordenadas.pag}.
+    Esq: ${coordenadas.esq}.
+    Bai: ${coordenadas.bai}.
+    Dir: ${coordenadas.dir}.
+    Cim: ${coordenadas.cim}.`
+  );
 };
 
 PDFAnnotate.prototype.enableSelector = function () {
@@ -249,7 +271,7 @@ PDFAnnotate.prototype.addImageToCanvasCustom = function () {
       image.onload = function () {
         fabricObj.add(new fabric.Image(image));
       };
-      image.src = "assinatura.png";
+      image.src = "assets/img/assinatura.png";
       inputElement.files[0];
     }
     document.getElementsByTagName("body")[0].appendChild(inputElement);
@@ -286,6 +308,9 @@ PDFAnnotate.prototype.deleteSelectedObject = function () {
     if (confirm("Você tem certeza?"))
       inst.fabricObjects[inst.active_canvas].remove(activeObject);
     $(".nkar").attr("ar-ativo", "0");
+    $("#ar-pyh").text(
+      `Insira a assinatura para obter informações dos comandos do pyhanko.`
+    );
   }
 };
 
