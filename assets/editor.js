@@ -8,7 +8,7 @@ var pdf = new PDFAnnotate("pdf-container", pdfFileName, {
   ready() {
     console.log("Plugin initialized successfully");
   },
-  scale: 1.1,
+  scale: 1,
   pageImageCompression: "MEDIUM", // FAST, MEDIUM, SLOW(Helps to control the new PDF file size)
 });
 

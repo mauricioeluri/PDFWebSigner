@@ -137,9 +137,9 @@ this.attSignatureVal = function (fabricObj, index) {
   var coordenadas = {
     pag: index + 1,
     esq: fabricObj["aCoords"]["bl"]["x"].toFixed(2),
-    bai: fabricObj["aCoords"]["bl"]["y"].toFixed(2),
+    bai: Math.abs(fabricObj["aCoords"]["bl"]["y"] - 595).toFixed(2),
     dir: fabricObj["aCoords"]["tr"]["x"].toFixed(2),
-    cim: fabricObj["aCoords"]["tr"]["y"].toFixed(2),
+    cim: Math.abs(fabricObj["aCoords"]["tr"]["y"] - 595).toFixed(2),
   };
 
   $("#ar-pyh").text(
