@@ -136,19 +136,22 @@ var PDFAnnotate = function (container_id, url, options = {}) {
 this.attSignatureVal = function (fabricObj, index) {
   var coordenadas = {
     pag: index + 1,
-    esq: fabricObj["aCoords"]["bl"]["x"].toFixed(2),
-    bai: Math.abs(fabricObj["aCoords"]["bl"]["y"] - 595).toFixed(2),
-    dir: fabricObj["aCoords"]["tr"]["x"].toFixed(2),
-    cim: Math.abs(fabricObj["aCoords"]["tr"]["y"] - 595).toFixed(2),
+    esq: Math.floor(fabricObj["aCoords"]["bl"]["x"]),
+    bai: Math.floor(Math.abs(fabricObj["aCoords"]["bl"]["y"] - 595)),
+    dir: Math.floor(fabricObj["aCoords"]["tr"]["x"]),
+    cim: Math.floor(Math.abs(fabricObj["aCoords"]["tr"]["y"] - 595)),
   };
 
-  $("#ar-pyh").text(
+  /* $("#ar-pyh").text(
     `Info sobre a assinatura:
     Pág: ${coordenadas.pag}.
     Esq: ${coordenadas.esq}.
     Bai: ${coordenadas.bai}.
     Dir: ${coordenadas.dir}.
     Cim: ${coordenadas.cim}.`
+  ); */
+  $("#coordenadas").val(
+    `${coordenadas.pag}/${coordenadas.esq},${coordenadas.bai},${coordenadas.dir},${coordenadas.cim}`
   );
 };
 

@@ -110,8 +110,25 @@ if(count(get_included_files()) ==1) exit('Acesso direto não permitido');
           <i class="fa fa-trash"></i>
         </button>
       </div>
-      <div class="tool">
+      <!--div class="tool">
         <p id="ar-pyh">Insira a assinatura para obter informações dos comandos do pyhanko.</p>
+      </div-->
+      <div class="tool">
+        <form
+          method="POST"
+          enctype="multipart/form-data"
+          action="pyhanko.php"
+        >
+          <div class="form-group row" style="margin-left: 15px">  
+            <label for="senha-p12" class="col-form-label">Senha da assinatura eletrônica:</label>
+            <div style="margin-left:15px;">
+              <input type="password" style="width: 90px" class="form-control" name="senha-p12" placeholder="Senha">
+            </div>
+          </div>
+          <input type="hidden" name="p12" value="<?=$status['p12']['filename']?>" />
+          <input type="hidden" name="pdf" id="pdf-inp" value="<?=$status['pdf']['filename']?>" />
+          <input type="hidden" name="coordenadas" id="coordenadas"/>
+        </form>
       </div>
       <!--div class="tool">
 		<button class="btn btn-danger btn-sm" onclick="clearPage()">Clear Page</button>
@@ -126,7 +143,7 @@ if(count(get_included_files()) ==1) exit('Acesso direto não permitido');
         </button>
       </div>
     </div>
-    <div id="pdf-container" ar-pdf="<?=$status['pdf']['filename']?>"></div>
+    <div id="pdf-container"></div>
     <!-- JSON File -->
     <!-- 
 <div class="modal fade" id="dataModal" tabindex="-1" role="dialog" aria-labelledby="dataModalLabel" aria-hidden="true">

@@ -1,4 +1,4 @@
-var pdfFileName = "upload/" + $("#pdf-container").attr("ar-pdf");
+var pdfFileName = "upload/" + $("#pdf-inp").val();
 
 var pdf = new PDFAnnotate("pdf-container", pdfFileName, {
   onPageUpdated(page, oldData, newData) {
