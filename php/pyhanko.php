@@ -12,4 +12,4 @@ $_FILES['coordenadas'] . '/DLK-SIGNATURE --style-name dlk-unihacker pkcs12 ' .
 $_FILES['pdf'] . ' output.pdf ' .
 $_FILES['p12'];
 
-return shell_exec($comando);
+return shell_exec("Resultado do comando: " . $comando);
