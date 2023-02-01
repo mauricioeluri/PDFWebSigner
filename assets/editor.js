@@ -85,9 +85,52 @@ function deleteSelectedObject(event) {
   pdf.deleteSelectedObject();
 }
 
-function savePDF() {
-  // pdf.savePdf();
-  pdf.savePdf(pdfFileName); // save with given file name
+function showCode() {
+  if ($("#coordenadas").val() === "") {
+    swal(
+      "Por favor, insira a assinatura eletrônica para que seja possível gerar o comando para o Pyhanko."
+    );
+  } else {
+    swal(
+      `pyhanko --config signature/pyhanko.yml sign addsig --field Sig1 --field ${$(
+        "#coordenadas"
+      ).val()}/DLK-SIGNATURE pkcs12 --p12-setup p12dlk upload/${$(
+        "#pdf-inp"
+      ).val()} output.pdf`
+    );
+  }
+}
+function signPdf() {
+  if ($("#coordenadas").val() === "") {
+    swal(
+      "Por favor, insira a assinatura eletrônica para que seja possível gerar o comando para o Pyhanko."
+    );
+  } else {
+    $("#form-data").submit();
+    /*var dados = $("#form-data").serialize();
+
+    request = $.ajax({
+      url: "php/pyhanko.php",
+      type: "post",
+      data: dados,
+    });
+    // Callback handler that will be called on success
+    request.done(function (response, textStatus, jqXHR) {
+      // Log a message to the console
+      //console.log("Hooray, it worked!");
+      //console.log(response);
+      //console.log(dados);
+    });
+    // Callback handler that will be called on failure
+    request.fail(function (jqXHR, textStatus, errorThrown) {
+      // Log the error to the console
+      console.error("The following error occurred: " + textStatus, errorThrown);
+    });
+    request.then(function (response) {
+      console.log(response);
+    });
+    */
+  }
 }
 
 function clearPage() {

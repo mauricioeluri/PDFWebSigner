@@ -1,2 +1,6 @@
 upload/*
 !upload/*.txt
+output/*
+!output/*.txt
+signature/*
+!signature/*.txt

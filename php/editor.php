@@ -132,7 +132,7 @@ if(count(get_included_files()) ==1) exit('Acesso direto não permitido');
         </button>
       </div>
     </div-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <span class="navbar-brand mb-0">Editor de PDF</span>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -158,12 +158,14 @@ if(count(get_included_files()) ==1) exit('Acesso direto não permitido');
                 </div>
             </div>
         </div>
-        <form class="form-inline" method="POST" enctype="multipart/form-data" action="pyhanko.php">
+        <form class="form-inline" id="form-data" method="POST" action="php/pyhanko.php">
             <input type="hidden" name="pdf" id="pdf-inp" value="<?=$status['pdf']['filename']?>" />
             <input type="hidden" name="coordenadas" id="coordenadas" />
             <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-outline-light fa-solid fa-code" onclick="savePDF()"> Code</button>
-                <button type="button" class="btn btn-outline-light fa-solid fa-download"> Download</button>
+                <button type="button" class="btn btn-outline-light fa-solid fa-code" onclick="showCode(event)">
+                    Code</button>
+                <button type="button" class="btn btn-outline-light fa-solid fa-download" onclick="signPdf(event)">
+                    Download</button>
             </div>
         </form>
     </nav>

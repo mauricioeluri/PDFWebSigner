@@ -304,6 +304,8 @@ PDFAnnotate.prototype.addImageToCanvasSign = function (data) {
   }
 };
 
+//PDFAnnotate.prototype.generateCode = function () {};
+
 PDFAnnotate.prototype.deleteSelectedObject = function () {
   var inst = this;
   var activeObject = inst.fabricObjects[inst.active_canvas].getActiveObject();
@@ -317,22 +319,8 @@ PDFAnnotate.prototype.deleteSelectedObject = function () {
   }
 };
 
-PDFAnnotate.prototype.savePdf = function (fileName) {
-  var comando = `pyhanko --config signature/pyhanko.yml sign addsig --field Sig1 --field ${$(
-    "#coordenadas"
-  ).val()}/DLK-SIGNATURE pkcs12 --p12-setup p12dlk upload/${$(
-    "#pdf-inp"
-  ).val()} output.pdf`;
-  if ($("#coordenadas").val() === "") {
-    swal(
-      "Por favor, insira a assinatura eletrônica para que seja possível gerar o comando para o Pyhanko."
-    );
-  } else {
-    swal(comando);
-  }
-
-  //Função antiga de baixar o pdf
-  /*  var inst = this;
+//Função antiga de baixar o pdf
+/*  var inst = this;
   var doc = new jspdf.jsPDF();
   if (typeof fileName === "undefined") {
     fileName = `${new Date().getTime()}.pdf`;
@@ -362,8 +350,7 @@ PDFAnnotate.prototype.savePdf = function (fileName) {
     }
   });
   */
-  //Função nova de enviar um request por ajax
-};
+//Função nova de enviar um request por ajax
 
 PDFAnnotate.prototype.setBrushSize = function (size) {
   var inst = this;
