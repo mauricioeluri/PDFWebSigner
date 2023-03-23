@@ -1,0 +1,14 @@
+version: "2"
+services:
+  assinador-pdf-service:
+    image: assinador-pdf
+    ports:
+      - "80:80"
+    volumes:
+      - ./app:/var/www/html
+    networks:
+      - impact
+
+networks:
+  impact:
+    external: true
