@@ -6,9 +6,3 @@ services:
       - "80:80"
     volumes:
       - ./app:/var/www/html
-    networks:
-      - impact
-
-networks:
-  impact:
-    external: true
