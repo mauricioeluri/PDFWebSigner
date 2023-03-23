@@ -1,6 +1,6 @@
-php/upload/*
-php/!upload/*.txt
-php/output/*
-php/!output/*.txt
-php/signature/*
-php/!signature/*.txt
+app/upload/*
+app/!upload/*.txt
+app/output/*
+app/!output/*.txt
+app/signature/*
+app/!signature/*.txt
