@@ -4,6 +4,8 @@ if (isset($_FILES['pdf'])) {
   $status['pdf'] = upload_file();
   require 'php/editor.php';
 } else {
+  $status['pdf']['info'] = "";
+  $status['pdf']['errors'] = "";
   require 'php/form.php';
 }
 
