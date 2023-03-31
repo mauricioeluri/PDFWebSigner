@@ -8,10 +8,8 @@ if(count(get_included_files()) ==1) exit('Acesso direto não permitido');
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/ico.png" />
     <title>Editor do Assinador de PDF</title>
     <link rel="stylesheet" href="assets/tools/bootstrap-4.4.1.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="assets/tools/prettify-r298.min.css" />
+    <link rel="stylesheet" href="assets/tools/fontawesome-6.4.0.min.css" />
+    <link rel="stylesheet" href="assets/tools/fontawesome-6.4.0-solid.min.css" />
     <link rel="stylesheet" href="assets/editor.css" />
     <link rel="stylesheet" href="assets/tools/pdfannotate.css" />
 
@@ -28,11 +26,11 @@ if(count(get_included_files()) ==1) exit('Acesso direto não permitido');
         <ul class="nav navbar-nav text-nowrap flex-row mx-md-auto order-1 order-md-2">
           <li class="nav-item">
             <div class="btn-group btn-group-lg" role="group" aria-label="Ferramentas de edição">
-              <button type="button" class="btn btn-outline-light fas fa-hand-paper tool-button"
+              <button type="button" class="btn btn-outline-light fa-solid fa-hand tool-button"
               title="Posicionar assinatura" onclick="enableSelector(event)" disabled></button>
-              <button type="button" class="btn btn-outline-light fas fa-signature tool-button"
+              <button type="button" class="btn btn-outline-light fa-solid fa-signature tool-button"
               title="Inserir assinatura" onclick="enableImageCheck(event)" disabled></button>
-              <button type="button" class="btn btn-outline-light fas fa-trash text-danger tool-button"
+              <button type="button" class="btn btn-outline-light fa-solid fa-trash text-danger tool-button"
               title="Remover assinatura" onclick="deleteSelectedObject(event)" disabled></button>
             </div>
           </li>
