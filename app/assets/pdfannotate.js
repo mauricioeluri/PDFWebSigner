@@ -85,7 +85,9 @@ var PDFAnnotate = function (container_id, url, options = {}) {
       $(fabricObj.upperCanvasEl).click(function (event) {
         inst.active_canvas = index;
         inst.fabricClickHandler(event, fabricObj);
-        attSignatureVal(fabricObj._objects[0], index);
+        if ($(".nkar").attr("ar-ativo") == "1") {
+          attSignatureVal(fabricObj._objects[0], index);
+        }
       });
       fabricObj.on("after:render", function () {
         inst.fabricObjectsData[index] = fabricObj.toJSON();
@@ -126,9 +128,17 @@ var PDFAnnotate = function (container_id, url, options = {}) {
         top:
           event.clientY - fabricObj.upperCanvasEl.getBoundingClientRect().top,
       });
+      imgCheck.controls = {
+        ...fabric.Text.prototype.controls,
+        mtr: new fabric.Control({ visible: false }),
+      };
       fabricObj.add(imgCheck);
       enableSelector(event);
       $(".nkar").attr("ar-ativo", "1");
+      $(".fa-trash").prop("disabled", false);
+      $(".fa-signature").prop("disabled", true);
+      $(".fa-code").prop("disabled", false);
+      $(".fa-download").prop("disabled", false);
     }
   };
 };
@@ -313,45 +323,15 @@ PDFAnnotate.prototype.deleteSelectedObject = function () {
     if (confirm("Você tem certeza?"))
       inst.fabricObjects[inst.active_canvas].remove(activeObject);
     $(".nkar").attr("ar-ativo", "0");
-    $("#ar-pyh").text(
-      `Insira a assinatura para obter informações dos comandos do pyhanko.`
-    );
+    $(".fa-trash").prop("disabled", true);
+    $(".fa-signature").prop("disabled", false);
+    $(".fa-code").prop("disabled", true);
+    $(".fa-download").prop("disabled", true);
+    $(".fa-hand-paper").addClass("active");
   }
 };
 
-//Função antiga de baixar o pdf
-/*  var inst = this;
-  var doc = new jspdf.jsPDF();
-  if (typeof fileName === "undefined") {
-    fileName = `${new Date().getTime()}.pdf`;
-  }
-
-  inst.fabricObjects.forEach(function (fabricObj, index) {
-    if (index != 0) {
-      doc.addPage();
-      doc.setPage(index + 1);
-    }
-    doc.addImage(
-      fabricObj.toDataURL({
-        format: "png",
-      }),
-      inst.pageImageCompression == "NONE" ? "PNG" : "JPEG",
-      0,
-      0,
-      doc.internal.pageSize.getWidth(),
-      doc.internal.pageSize.getHeight(),
-      `page-${index + 1}`,
-      ["FAST", "MEDIUM", "SLOW"].indexOf(inst.pageImageCompression) >= 0
-        ? inst.pageImageCompression
-        : undefined
-    );
-    if (index === inst.fabricObjects.length - 1) {
-      doc.save(fileName);
-    }
-  });
-  */
 //Função nova de enviar um request por ajax
-
 PDFAnnotate.prototype.setBrushSize = function (size) {
   var inst = this;
   $.each(inst.fabricObjects, function (index, fabricObj) {

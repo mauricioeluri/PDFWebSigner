@@ -6,7 +6,9 @@ var pdf = new PDFAnnotate("pdf-container", pdfFileName, {
     // console.log(page, oldData, newData);
   },
   ready() {
-    console.log("Plugin initialized successfully");
+    $(".fa-hand-paper").prop("disabled", false);
+    $(".fa-signature").prop("disabled", false);
+    $(".fa-hand-paper").addClass("active");
   },
   scale: 1,
   pageImageCompression: "MEDIUM", // FAST, MEDIUM, SLOW(Helps to control the new PDF file size)
@@ -148,8 +150,8 @@ function showSignModal() {
 }
 $(function () {
   $(".color-tool").click(function () {
-    $(".color-tool.active").removeClass("active");
-    $(this).addClass("active");
+    // $(".color-tool.active").removeClass("active");
+    //$(this).addClass("active");
     color = $(this).get(0).style.backgroundColor;
     pdf.setColor(color);
   });
@@ -190,9 +192,11 @@ function resizeCanvas(canvas) {
 window.onresize = resizeCanvas(canvas);
 resizeCanvas(canvas);
 
+/*
 var signaturePad = new SignaturePad(canvas, {
   backgroundColor: "rgba(0, 0, 0,0)", // necessary for saving image as JPEG; can be removed is only saving as PNG or SVG
 });
+*/
 
 document.getElementById("save-png").addEventListener("click", function () {
   if (signaturePad.isEmpty()) {

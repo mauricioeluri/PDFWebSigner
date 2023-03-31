@@ -14,30 +14,26 @@ if(count(get_included_files()) ==1) exit('Acesso direto não permitido');
     <link rel="stylesheet" href="assets/tools/prettify-r298.min.css" />
     <link rel="stylesheet" href="assets/editor.css" />
     <link rel="stylesheet" href="assets/tools/pdfannotate.css" />
+
+
+
+
   </head>
   <body>
     <nav class="navbar navbar-expand-md navbar-fixed-top navbar-dark bg-dark main-nav">
       <span class="navbar-brand mb-0 ml-5"> Editor do Assinador de PDF</span>
       <div class="container ml-0">
         <div class="navbar-collapse collapse nav-content order-2 tool nav-link nav-item">
-          <ul class="nav navbar-nav">
-            <li class="nav-item active">
-              <!--button class="btn btn-outline-light fa-solid" id="label-assinatura">
-              Gerenciar assinaturas
-            </button-->
-          
-            </li>
-          </ul>
         </div>
         <ul class="nav navbar-nav text-nowrap flex-row mx-md-auto order-1 order-md-2">
           <li class="nav-item">
-            <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
-              <button type="button" class="btn btn-outline-light fa-solid fa-hand-paper fa-lg"
-              onclick="showCode(event)" disabled></button>
-              <button type="button" class="btn btn-outline-light fa-solid fa-signature fa-lg"
-              onclick="signPdf(event)" disabled></button>
-              <button type="button" class="btn btn-outline-light fa-solid fa-trash text-danger fa-lg"
-              onclick="signPdf(event)" disabled></button>
+            <div class="btn-group btn-group-lg" role="group" aria-label="Ferramentas de edição">
+              <button type="button" class="btn btn-outline-light fas fa-hand-paper tool-button"
+              title="Posicionar assinatura" onclick="enableSelector(event)" disabled></button>
+              <button type="button" class="btn btn-outline-light fas fa-signature tool-button"
+              title="Inserir assinatura" onclick="enableImageCheck(event)" disabled></button>
+              <button type="button" class="btn btn-outline-light fas fa-trash text-danger tool-button"
+              title="Remover assinatura" onclick="deleteSelectedObject(event)" disabled></button>
             </div>
           </li>
           <button class="navbar-toggler ml-2" type="button" data-toggle="collapse" data-target=".nav-content"
@@ -52,7 +48,7 @@ if(count(get_included_files()) ==1) exit('Acesso direto não permitido');
                 <input type="hidden" name="pdf" id="pdf-inp" value="
 									<?=$status['pdf']['filename']?>" />
                 <input type="hidden" name="coordenadas" id="coordenadas" />
-                <div class="btn-group position absolute end-0" role="group" aria-label="Basic example">
+                <div class="btn-group position absolute end-0" role="group" aria-label="Gerador">
                   <button type="button" class="btn btn-outline-light fa-solid fa-code"
                   onclick="showCode(event)" disabled> Code</button>
                   <button type="button" class="btn btn-outline-light fa-solid fa-download"
@@ -65,7 +61,6 @@ if(count(get_included_files()) ==1) exit('Acesso direto não permitido');
       </div>
     </nav>
     <div id="pdf-container"></div>
-    <!-- Signature Modal -->
     <div class="modal fade" id="dataModalSign" tabindex="-1" role="dialog" aria-labelledby="dataSignature" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -90,22 +85,30 @@ if(count(get_included_files()) ==1) exit('Acesso direto não permitido');
     <div class="tool">
       <img src="assets/img/assinatura.png" alt="Assinatura" class="nkar" hidden ar-ativo="0" />
     </div>
-    <!-- Signature Script -->
-    <script src="assets/tools/signature_pad.umd.js"></script>
+
     <script src="assets/tools/jquery-3.5.1.min.js"></script>
-    <script src="assets/tools/popper-1.16.1.min.js"></script>
     <script src="assets/tools/bootstrap-4.5.2.min.js"></script>
     <script src="assets/tools/pdf-2.6.347.min.js"></script>
     <script>
       pdfjsLib.GlobalWorkerOptions.workerSrc = "assets/tools/pdf.worker-2.6.347.min.js";
     </script>
     <script src="assets/tools/fabric-4.3.0.min.js"></script>
-    <script src="assets/tools/jspdf.umd-2.2.0.min.js"></script>
-    <script src="assets/tools/run_prettify.js"></script>
-    <script src="assets/tools/prettify-r298.min.js"></script>
-    <script src="assets/tools/arrow.fabric.js"></script>
     <script src="assets/tools/sweetalert.min.js"></script>
     <script src="assets/pdfannotate.js"></script>
+    
+    <!-- JS do Editor. Precisa ser carregado por último para calcular o tamanho da tela do editor de PDF -->
     <script src="assets/editor.js"></script>
+
+    <!-- FERRAMENTAS QUE PODEM DAR MAIS FUNÇÕES PARA O PDF. FORAM REMOVIDOS PARA SIMPLIFICAR A VERSÃO ATUAL -->
+
+    <!-- Script para desenhar assinatura -->
+    <!--script src="assets/tools/signature_pad.umd.js"></script-->
+
+    <!--script src="assets/tools/popper-1.16.1.min.js"></script-->
+    <!--script src="assets/tools/jspdf.umd-2.2.0.min.js"></script-->
+    <!--script src="assets/tools/run_prettify.js"></script-->
+    <!--script src="assets/tools/prettify-r298.min.js"></script-->
+    <!--script src="assets/tools/arrow.fabric.js"></script-->
+
   </body>
 </html>
