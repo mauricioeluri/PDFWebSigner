@@ -1,7 +1,6 @@
 <?php
 if(count(get_included_files()) ==1) exit('Acesso direto não permitido');
 ?><!DOCTYPE html>
-
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
@@ -9,7 +8,6 @@ if(count(get_included_files()) ==1) exit('Acesso direto não permitido');
     <title>Assinador de PDF</title>
     <link rel="stylesheet" href="assets/form.css" />
   </head>
-
   <body>
     <h1>Assinador de PDF <span>Para certificados eletrônicos</span></h1>
     <form method="POST" enctype="multipart/form-data">

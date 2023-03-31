@@ -12,10 +12,6 @@ if(count(get_included_files()) ==1) exit('Acesso direto não permitido');
     <link rel="stylesheet" href="assets/tools/fontawesome-6.4.0-solid.min.css" />
     <link rel="stylesheet" href="assets/editor.css" />
     <link rel="stylesheet" href="assets/tools/pdfannotate.css" />
-
-
-
-
   </head>
   <body>
     <nav class="navbar navbar-expand-md navbar-fixed-top navbar-dark bg-dark main-nav">
@@ -83,7 +79,6 @@ if(count(get_included_files()) ==1) exit('Acesso direto não permitido');
     <div class="tool">
       <img src="assets/img/assinatura.png" alt="Assinatura" class="nkar" hidden ar-ativo="0" />
     </div>
-
     <script src="assets/tools/jquery-3.5.1.min.js"></script>
     <script src="assets/tools/bootstrap-4.5.2.min.js"></script>
     <script src="assets/tools/pdf-2.6.347.min.js"></script>
@@ -93,7 +88,6 @@ if(count(get_included_files()) ==1) exit('Acesso direto não permitido');
     <script src="assets/tools/fabric-4.3.0.min.js"></script>
     <script src="assets/tools/sweetalert.min.js"></script>
     <script src="assets/pdfannotate.js"></script>
-    
     <!-- JS do Editor. Precisa ser carregado por último para calcular o tamanho da tela do editor de PDF -->
     <script src="assets/editor.js"></script>
 
@@ -107,6 +101,5 @@ if(count(get_included_files()) ==1) exit('Acesso direto não permitido');
     <!--script src="assets/tools/run_prettify.js"></script-->
     <!--script src="assets/tools/prettify-r298.min.js"></script-->
     <!--script src="assets/tools/arrow.fabric.js"></script-->
-
   </body>
 </html>

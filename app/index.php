@@ -20,9 +20,8 @@ if (isset($_FILES['pdf']) || isset($_FILES['p12'])) {
 }
 
 function upload_file($fileType = ''){
-  $uploadDirectory = getcwd().'/upload/';
+  $uploadDirectory = '';
   $fileName =  substr(md5(rand().rand()), 0, 8).'e.'.$fileType;
-  $uploadPath = $uploadDirectory . basename($fileName);
   $status = [];
   $status['errors'] = '';
   //Verifica se o arquivo foi enviado
@@ -32,11 +31,13 @@ function upload_file($fileType = ''){
       if (strcmp($_FILES[$fileType]['type'], "application/pdf") !== 0) {
         $status['errors'] = "Extensão não permitida. Por favor, envie um arquivo $fileType.<br />";
       }
+      $uploadDirectory = getcwd().'/upload/';
     }
     if (strcmp($fileType, 'p12') == 0){
       if (strcmp($_FILES[$fileType]['type'], "application/x-pkcs12") !== 0) {
         $status['errors'] = 'Extensão não permitida. Por favor, envie um arquivo '.$fileType.'<br />'.var_dump($_FILES);
       }
+      $uploadDirectory = getcwd().'/signature/';
     }
 
   //Tamanho máximo - 20mb
@@ -46,6 +47,7 @@ function upload_file($fileType = ''){
   
   //Se não tiver erros, faz o upload
   if (empty($errors)) {
+    $uploadPath = $uploadDirectory . basename($fileName);
     $didUpload = move_uploaded_file($_FILES[$fileType]['tmp_name'], $uploadPath);
     
     if ($didUpload) {
