@@ -1,1 +1,0 @@
-Verificar permissões desta pasta.
