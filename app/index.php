@@ -20,8 +20,8 @@ if (isset($_FILES['pdf']) || isset($_FILES['p12'])) {
 }
 
 function upload_file($fileType = ''){
+  $fileName = substr(md5(rand().rand()), 0, 8);
   $uploadDirectory = '';
-  $fileName =  substr(md5(rand().rand()), 0, 8).'e.'.$fileType;
   $status = [];
   $status['errors'] = '';
   //Verifica se o arquivo foi enviado
@@ -37,6 +37,9 @@ function upload_file($fileType = ''){
       if (strcmp($_FILES[$fileType]['type'], "application/x-pkcs12") !== 0) {
         $status['errors'] = 'Extensão não permitida. Por favor, envie um arquivo '.$fileType.'<br />'.var_dump($_FILES);
       }
+      if (isset($_POST['manter-assinatura'])) {
+        $fileName = 'assinatura-fixa';
+      }
       $uploadDirectory = getcwd().'/signature/';
     }
 
@@ -48,7 +51,8 @@ function upload_file($fileType = ''){
   //Se não tiver erros, faz o upload
   if (empty($errors)) {
     $uploadPath = $uploadDirectory . basename($fileName);
-    $didUpload = move_uploaded_file($_FILES[$fileType]['tmp_name'], $uploadPath);
+    
+    $didUpload = move_uploaded_file($_FILES[$fileType]['tmp_name'], $uploadPath . '.' . $fileType);
     
     if ($didUpload) {
       $status['info'] = "<span style='color:#28a745'>O arquivo <b>" . $fileType . "</b> foi enviado.</span>";
