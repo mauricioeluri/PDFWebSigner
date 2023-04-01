@@ -1,6 +1,13 @@
-app/upload/*
-app/!upload/*.txt
+!/app/output
 app/output/*
-app/!output/*.txt
+!/app/output/directory.txt
+
+!/app/signature
 app/signature/*
-app/!signature/*.txt
+!/app/signature/directory.txt
+!/app/signature/pyhanko.yml
+!/app/signature/unihacker.png
+
+!/app/upload
+app/upload/*
+!/app/upload/directory.txt

@@ -1,6 +1,4 @@
 <?php
-if(count(get_included_files()) ==1) exit('Acesso direto não permitido');
-
 if (! (isset($_POST['pdf']) && isset($_POST['coordenadas'])) ) {
     echo json_encode("Por favor, verifique se os dados foram enviados. Se isto não funcionar, reenvie o formulário inicial novamente.".$_FILES['coordenadas']['type'].$_FILES['pdf']);
 } else {

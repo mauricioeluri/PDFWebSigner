@@ -143,4 +143,5 @@ function salvarArquivo($arquivo, $tipo, $nome = null){
 function limpaPastas() {
   shell_exec("find " . getcwd() . "/signature/ -type f -not -name 'directory.txt' -not -name 'assinatura-fixa.p12' -delete");
   shell_exec("find " . getcwd() . "/upload/ -type f -not -name 'directory.txt' -delete");
+  shell_exec("find " . getcwd() . "/output/ -type f -not -name 'directory.txt' -delete");
 }
