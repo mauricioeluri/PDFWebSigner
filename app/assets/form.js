@@ -139,3 +139,16 @@
 })(jQuery);
 
 $("input[type=file]").customFile();
+
+var excluir = function () {
+  if (confirm("Você tem certeza que deseja excluir sua assinatura?")) {
+    $("#acao-assinatura").val("excluir");
+    $("#form").submit();
+  }
+};
+
+$('input[type="checkbox"]').click(function () {
+  if ($(this).prop("checked") == true) {
+    $("#acao-assinatura").val("manter");
+  }
+});

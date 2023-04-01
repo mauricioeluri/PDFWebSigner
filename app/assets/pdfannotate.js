@@ -327,7 +327,7 @@ PDFAnnotate.prototype.deleteSelectedObject = function () {
     $(".fa-signature").prop("disabled", false);
     $(".fa-code").prop("disabled", true);
     $(".fa-download").prop("disabled", true);
-    $(".fa-hand-paper").addClass("active");
+    $(".fa-hand").addClass("active");
   }
 };
 

@@ -39,8 +39,7 @@ if(count(get_included_files()) ==1) exit('Acesso direto não permitido');
           <ul class="ml-auto nav navbar-nav">
             <li class="nav-item">
               <form class="form-inline" id="form-data" method="POST" action="php/pyhanko.php">
-                <input type="hidden" name="pdf" id="pdf-inp" value="
-									<?=$status['pdf']['filename']?>" />
+                <input type="hidden" name="pdf" id="pdf-inp" value="<?=$arquivos['pdf']['filename']?>" />
                 <input type="hidden" name="coordenadas" id="coordenadas" />
                 <div class="btn-group position absolute end-0" role="group" aria-label="Gerador">
                   <button type="button" class="btn btn-outline-light fa-solid fa-code"

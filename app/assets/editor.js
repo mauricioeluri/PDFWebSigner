@@ -1,4 +1,4 @@
-var pdfFileName = "upload/" + $("#pdf-inp").val();
+var pdfFileName = "upload/" + $("#pdf-inp").val() + ".pdf";
 
 var pdf = new PDFAnnotate("pdf-container", pdfFileName, {
   onPageUpdated(page, oldData, newData) {
@@ -6,9 +6,9 @@ var pdf = new PDFAnnotate("pdf-container", pdfFileName, {
     // console.log(page, oldData, newData);
   },
   ready() {
-    $(".fa-hand-paper").prop("disabled", false);
+    $(".fa-hand").prop("disabled", false);
     $(".fa-signature").prop("disabled", false);
-    $(".fa-hand-paper").addClass("active");
+    $(".fa-hand").addClass("active");
   },
   scale: 1,
   pageImageCompression: "MEDIUM", // FAST, MEDIUM, SLOW(Helps to control the new PDF file size)
