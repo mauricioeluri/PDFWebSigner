@@ -14,7 +14,7 @@ if(count(get_included_files()) ==1) exit('Acesso direto não permitido');
     <link rel="stylesheet" href="assets/tools/pdfannotate.css" />
   </head>
   <body>
-    <nav class="navbar navbar-expand-md navbar-fixed-top navbar-dark bg-dark main-nav">
+    <nav class="navbar navbar-expand-md navbar-fixed-top sticky-top navbar-dark bg-dark main-nav">
       <span class="navbar-brand mb-0 ml-5"> Editor do Assinador de PDF</span>
       <div class="container ml-0">
         <div class="navbar-collapse collapse nav-content order-2 tool nav-link nav-item">
