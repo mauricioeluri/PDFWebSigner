@@ -138,10 +138,11 @@ function salvarArquivo($arquivo, $tipo, $nome = null){
 
 /**
  * Por motivos de segurança, as pastas são limpas a cada vez que o formulário é aberto.
- * Só ficam os arquivos directory e a assinatura fixa.
+ * Só ficam os arquivos directory.txt e a assinatura fixa.
+ * Na pasta signature são permitidos outros arquivos, tendo em vista que podem fazer parte da assinatura.
 */
 function limpaPastas() {
-  shell_exec("find " . getcwd() . "/signature/ -type f -not -name 'directory.txt' -not -name 'assinatura-fixa.p12' -delete");
+  shell_exec("find " . getcwd() . "/signature/*.p12 -type f -not -name 'assinatura-fixa.p12' -delete");
   shell_exec("find " . getcwd() . "/upload/ -type f -not -name 'directory.txt' -delete");
   shell_exec("find " . getcwd() . "/output/ -type f -not -name 'directory.txt' -delete");
 }
