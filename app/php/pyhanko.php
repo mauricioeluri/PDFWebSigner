@@ -1,5 +1,5 @@
 <?php
-if (! (isset($_POST['pdf']) && isset($_POST['coordenadas'])) ) {
+if ( !(isset($_POST['pdf']) && isset($_POST['coordenadas'])) ) {
     echo json_encode("Por favor, verifique se os dados foram enviados. Se isto não funcionar, reenvie o formulário inicial novamente.".$_FILES['coordenadas']['type'].$_FILES['pdf']);
 } else {
     $comando = 'python3 pyhanko --verbose --config ../signature/pyhanko.yml sign addsig --field Sig1 --field ' .

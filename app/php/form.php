@@ -1,6 +1,5 @@
-<?php
-if(count(get_included_files()) ==1) exit('Acesso direto não permitido');
-?><!DOCTYPE html>
+<?php if(count(get_included_files()) == 1)exit('Acesso direto não permitido')?>
+<!DOCTYPE html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />

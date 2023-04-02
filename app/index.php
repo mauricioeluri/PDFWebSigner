@@ -5,10 +5,11 @@ carregarPaginas();
 function carregarPaginas() {
   if(isset($_POST['acao-assinatura'])){
     $arquivos = carregarArquivos();
-    if(!isset($arquivos['p12']['erros']) && !isset($arquivos['pdf']['erros'])) {
-      require 'php/editor.php';
-      exit();
+    if((!strlen($arquivos['p12']['erros']) > 0) &&
+       (!strlen($arquivos['pdf']['erros']) > 0)) {
+      return require 'php/editor.php';
     }
+    return require 'php/form.php';
   } else {
     formularioEmBranco();
   }
@@ -16,19 +17,20 @@ function carregarPaginas() {
 
 function formularioEmBranco() {
   $arquivos = array(
-    "pdf"   => array(
-      "erros"  => ""
+    'pdf'   => array(
+      'erros' => ''
     ),
-    "p12"   => array(
-      "info"    => "",
-      "erros"  => "")
+    'p12'   => array(
+      'info'  => '',
+      'erros' => ''
+    )
   );
-  $ass_fixa = file_exists(getcwd().'/signature/assinatura-fixa.p12');
+  $ass_fixa = file_exists(getcwd() . '/signature/assinatura-fixa.p12');
   if($ass_fixa) {
-    $arquivos['p12']['info'] = "assinatura-fixa";
+    $arquivos['p12']['info'] = 'assinatura-fixa';
   }
   limpaPastas();
-  require 'php/form.php';
+  return require 'php/form.php';
 }
 
 function carregarArquivos() {
@@ -43,30 +45,37 @@ function carregarArquivos() {
  * Verifica se os arquivos foram enviados corretamente
  */
 function validarArquivo($extensao) {
-  $erros = null;
+  $erros = '';
   if (isset($_FILES[$extensao])) {
     
     if ($_FILES[$extensao]['size'] > 0) {
-      if ((strcmp($_FILES[$extensao]['type'], "application/pdf") == 0) &&
-          (strcmp($_FILES[$extensao]['type'], "application/x-pkcs12") == 0)) {
+      if ((strcmp($_FILES[$extensao]['type'], 'application/pdf') == 0) &&
+          (strcmp($_FILES[$extensao]['type'], 'application/x-pkcs12') == 0)) {
         $erros = "Extensão não permitida. Por favor, envie um arquivo $extensao.<br />";
       }
       if ($_FILES[$extensao]['size'] > 20000000) {
-        $erros .= "O arquivo excede o limite de 20MB.<br />";
+        $erros .= 'O arquivo excede o limite de 20MB.<br />';
+      }
+      //Testando se o arquivo é válido
+      if (strcmp($_FILES[$extensao]['type'], 'application/pdf') == 0) {
+        $arquivo = file_get_contents($_FILES[$extensao]['tmp_name']);
+        if (!preg_match("/^%PDF-/", $arquivo)) {
+          $erros .= 'Arquivo PDF inválido! Revise seu arquivo e tente novamente.<br />';
+        }
       }
     } else {
-      $erros = "Você não enviou o arquivo $extensao.";
+      return "Você não enviou o arquivo $extensao.";
     }
-  }
+  } 
   return $erros;
 }
 
 function verificarPdf($pdf_upload_erros) {
   if (isset($_FILES['pdf'])) {
-    if ($pdf_upload_erros == null) {
+    if ($pdf_upload_erros == "") {
       return salvarArquivo($_FILES['pdf'], 'pdf');
     }
-  } return array("erros" => $pdf_upload_erros);
+  } return array('erros' => $pdf_upload_erros);
 }
 
 /**
@@ -74,25 +83,26 @@ function verificarPdf($pdf_upload_erros) {
  */
 function verificarAssinatura($p12_upload_erros){
   $opcao = null;
+  $ass_fixa = file_exists(getcwd().'/signature/assinatura-fixa.p12');
   $arquivo = array (
-    "info" => "",
-    "erros" => null
+    'info' => '',
+    'erros' => ''
   );
   if (isset($_POST['acao-assinatura'])) {
     $opcao = $_POST['acao-assinatura'];
   }
-  $ass_fixa = file_exists(getcwd().'/signature/assinatura-fixa.p12');
   //Se tem erro no upload, não tem arquivo, logo, se usa a fixa.
-  if ($p12_upload_erros != null) {
+  if ($p12_upload_erros != '') {
     if ($ass_fixa) {
-      $arquivo['info'] = "assinatura-fixa";
+      $arquivo['info'] = 'assinatura-fixa';
       if ($opcao == "excluir") {
         excluirAssinatura();
         formularioEmBranco();
       }
+      return $arquivo;
     } else {
       //Não enviou arquivo e nem possui fixa, retorna os erros do upload.
-      $arquivo["erros"] = $p12_upload_erros;
+      $arquivo['erros'] = $p12_upload_erros;
       return $arquivo;
     }
   } else {
@@ -100,7 +110,7 @@ function verificarAssinatura($p12_upload_erros){
     if ($ass_fixa) {
       excluirAssinatura();
     }
-    if ($opcao == "manter") {
+    if ($opcao == 'manter') {
       return salvarArquivo($_FILES['p12'], 'p12', 'assinatura-fixa');
     }
     return salvarArquivo($_FILES['p12'], 'p12');
@@ -115,13 +125,13 @@ function excluirAssinatura(){
 
 function salvarArquivo($arquivo, $tipo, $nome = null){
   $status = array(
-    "info"      => "",
-    "filename"  => "",
-    "erros"     => null
+    'info'      => '',
+    'filename'  => '',
+    'erros'     => ''
   );
-  $pasta = "upload";
-  if ($tipo == "p12") {
-    $pasta = "signature";
+  $pasta = 'upload';
+  if ($tipo == 'p12') {
+    $pasta = 'signature';
   }
   if($nome == null) {
     $nome = substr(md5(rand().rand()), 0, 8);
@@ -131,7 +141,7 @@ function salvarArquivo($arquivo, $tipo, $nome = null){
   if ($sucesso) {
     $status['filename'] = basename($nome);
   } else {
-    $status['erros'] = "Verifique se as permissões corretas das pastas de upload foram definidas.";     
+    $status['erros'] = 'Verifique se as permissões corretas das pastas de upload foram definidas.';
   }
   return $status;
 }
