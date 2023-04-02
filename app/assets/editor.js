@@ -1,10 +1,7 @@
 var pdfFileName = "upload/" + $("#pdf-inp").val() + ".pdf";
 
 var pdf = new PDFAnnotate("pdf-container", pdfFileName, {
-  onPageUpdated(page, oldData, newData) {
-    //Vesrion  Update
-    // console.log(page, oldData, newData);
-  },
+  onPageUpdated(page, oldData, newData) {},
   ready() {
     $(".fa-hand").prop("disabled", false);
     $(".fa-signature").prop("disabled", false);
@@ -67,13 +64,16 @@ function addImage(event) {
   event.preventDefault();
   pdf.addImageToCanvas();
 }
+
 function addImageCustom(event) {
   event.preventDefault();
   pdf.addImageToCanvasCustom();
 }
+
 function addSignature(data) {
   pdf.addImageToCanvasSign(data);
 }
+
 function enableRectangle(event) {
   event.preventDefault();
   changeActiveTool(event);
@@ -88,51 +88,28 @@ function deleteSelectedObject(event) {
 }
 
 function showCode() {
-  if ($("#coordenadas").val() === "") {
-    swal(
-      "Por favor, insira a assinatura eletrônica para que seja possível gerar o comando para o Pyhanko."
-    );
-  } else {
-    swal(
-      `pyhanko --config signature/pyhanko.yml sign addsig --field Sig1 --field ${$(
-        "#coordenadas"
-      ).val()}/DLK-SIGNATURE pkcs12 --p12-setup p12dlk upload/${$(
-        "#pdf-inp"
-      ).val()} output.pdf`
-    );
-  }
-}
-function signPdf() {
-  if ($("#coordenadas").val() === "") {
-    swal(
-      "Por favor, insira a assinatura eletrônica para que seja possível gerar o comando para o Pyhanko."
-    );
-  } else {
-    $("#form-data").submit();
-    /*var dados = $("#form-data").serialize();
+  var codigo = `pyhanko --config signature/pyhanko.yml sign addsig --field Sig1 --field ${$(
+    "#coordenadas"
+  ).val()}/DLK-SIGNATURE pkcs12 --p12-setup p12dlk upload/${$(
+    "#pdf-inp"
+  ).val()}.pdf output.pdf`;
 
-    request = $.ajax({
-      url: "php/pyhanko.php",
-      type: "post",
-      data: dados,
-    });
-    // Callback handler that will be called on success
-    request.done(function (response, textStatus, jqXHR) {
-      // Log a message to the console
-      //console.log("Hooray, it worked!");
-      //console.log(response);
-      //console.log(dados);
-    });
-    // Callback handler that will be called on failure
-    request.fail(function (jqXHR, textStatus, errorThrown) {
-      // Log the error to the console
-      console.error("The following error occurred: " + textStatus, errorThrown);
-    });
-    request.then(function (response) {
-      console.log(response);
-    });
-    */
-  }
+  swal({
+    title: "Seu código foi gerado!",
+    text: codigo,
+    buttons: "Copiar para a àrea de transferência",
+    icon: "success",
+  }).then(() => {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val(codigo).select();
+    document.execCommand("copy");
+    $temp.remove();
+  });
+}
+
+function signPdf() {
+  $("#form-data").submit();
 }
 
 function clearPage() {
@@ -145,22 +122,20 @@ function showPdfData() {
   PR.prettyPrint();
   $("#dataModal").modal("show");
 }
+
 function showSignModal() {
   $("#dataModalSign").modal("show");
 }
+
 $(function () {
   $(".color-tool").click(function () {
-    // $(".color-tool.active").removeClass("active");
-    //$(this).addClass("active");
     color = $(this).get(0).style.backgroundColor;
     pdf.setColor(color);
   });
-
   $("#brush-size").change(function () {
     var width = $(this).val();
     pdf.setBrushSize(width);
   });
-
   $("#font-size").change(function () {
     var font_size = $(this).val();
     pdf.setFontSize(font_size);
