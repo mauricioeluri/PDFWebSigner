@@ -88,24 +88,32 @@ function deleteSelectedObject(event) {
 }
 
 function showCode() {
-  var codigo = `pyhanko --config signature/pyhanko.yml sign addsig --field Sig1 --field ${$(
-    "#coordenadas"
-  ).val()}/DLK-SIGNATURE pkcs12 --p12-setup p12dlk upload/${$(
-    "#pdf-inp"
-  ).val()}.pdf output.pdf`;
+  var coordenadas = $("#coordenadas").val();
+  var codigo =
+    "pyhanko sign addfields --field " +
+    coordenadas +
+    "/NAME input.pdf output.pdf";
 
   swal({
     title: "Seu código foi gerado!",
-    text: codigo,
-    buttons: "Copiar para a àrea de transferência",
+    text: "Escolha qual das opções você deseja copiar para a àrea de transferência.",
+    buttons: ["Coordenadas", "Código Simples"],
     icon: "success",
-  }).then(() => {
-    var $temp = $("<input>");
-    $("body").append($temp);
-    $temp.val(codigo).select();
-    document.execCommand("copy");
-    $temp.remove();
+  }).then((success) => {
+    if (success) {
+      copiarValores(codigo);
+    } else {
+      copiarValores(coordenadas);
+    }
   });
+}
+
+function copiarValores(codigo) {
+  var $temp = $("<input>");
+  $("body").append($temp);
+  $temp.val(codigo).select();
+  document.execCommand("copy");
+  $temp.remove();
 }
 
 function signPdf() {
@@ -169,7 +177,8 @@ resizeCanvas(canvas);
 
 /*
 var signaturePad = new SignaturePad(canvas, {
-  backgroundColor: "rgba(0, 0, 0,0)", // necessary for saving image as JPEG; can be removed is only saving as PNG or SVG
+  backgroundColor: "rgba(0, 0, 0,0)",
+  // necessary for saving image as JPEG; can be removed is only saving as PNG or SVG
 });
 */
 

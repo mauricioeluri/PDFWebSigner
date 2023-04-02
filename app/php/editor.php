@@ -41,7 +41,7 @@
                 <input type="hidden" name="coordenadas" id="coordenadas" />
                 <div class="btn-group position absolute end-0" role="group" aria-label="Gerador">
                   <button type="button" class="btn btn-outline-light fa-solid fa-code"
-                  onclick="showCode(event)" disabled> Code</button>
+                  onclick="showCode(event)" disabled> Código</button>
                   <button type="button" class="btn btn-outline-light fa-solid fa-download"
                   onclick="signPdf(event)" disabled> Download</button>
                 </div>
