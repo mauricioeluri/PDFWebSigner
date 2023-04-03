@@ -2,34 +2,25 @@ FROM php:8.1-apache-bullseye
 ADD ./app /var/www/html
 EXPOSE 80
 
-
-# UPDATE PACKAGE INFORMATION
+# Atualizando pacotes
 RUN apt-get update
 
-
-# INSTALL PACKAGES
+# Instalando dependências
 RUN apt-get install --yes \
   sudo \
   python3 \
-  python3-pip
+  python3-pip \
+  fonts-noto
 
-# UPGRADE PIP
-#RUN python3 -m pip install \
- # --upgrade pip
+# Definindo permissões da pasta para o php.
+# Serve para gerenciar os arquivos diretamente
+# pela aplicação.
+RUN chown -R www-data:www-data /var/www
 
-
-# iNSTALL PYHANKO
-#RUN pip3 install pyhanko
-#RUN pip3 install image
-#RUN pip3 install uharfbuzz
-#RUN pip3 install fontTools
-
-
-# chown -R www-data:www-data /var/www
-# sudo -H -u www-data pip3 install pip-tools
-
-#working
-#sudo -H -u www-data pip3 install pyhanko
-#sudo -H -u www-data pip3 install image
-#sudo -H -u www-data pip3 install uharfbuzz 
-#sudo -H -u www-data pip3 install fontTools
+# Instalando bibliotecas do pyhanko pelo
+# usuário www-data, para que o pyhanko possa
+# ser executado diretamente pelo php.
+RUN sudo -Hu www-data pip3 install pyhanko
+RUN sudo -Hu www-data pip3 install image
+RUN sudo -Hu www-data pip3 install uharfbuzz 
+RUN sudo -Hu www-data pip3 install fontTools
