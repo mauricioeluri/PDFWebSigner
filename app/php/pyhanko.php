@@ -9,7 +9,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             limpaPastas();
            header('Location: ../output/' . $_POST['pdf'] . '.pdf');
         } else {
-            echo "Houve um erro durante a geração do seu PDF";
+            echo "Houve um erro durante a geração do seu PDF.<br />
+            Por favor, verifique se o seu arquivo de configuração do pyhanko está configurado corretamente.";
         }
     } else {
         echo "Por favor, reinicie a página e tente novamente.";
