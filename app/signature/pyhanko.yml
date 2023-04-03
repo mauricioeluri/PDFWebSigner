@@ -1,6 +1,6 @@
 pkcs12-setups:
   p12dlk:
-    pfx-file: ../signature/assinatura-fixa.p12
+    pfx-file: ../signature/assinatura.p12
     pfx-passphrase: ADICIONE SUA SENHA AQUI
 stamp-styles:
   default:

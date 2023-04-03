@@ -7,9 +7,11 @@ function carregarPaginas() {
     $arquivos = carregarArquivos();
     if((!strlen($arquivos['p12']['erros']) > 0) &&
        (!strlen($arquivos['pdf']['erros']) > 0)) {
-      return require 'php/editor.php';
+      require 'php/editor.php';
+      exit();
     }
-    return require 'php/form.php';
+  require 'php/form.php';
+  exit();
   } else {
     formularioEmBranco();
   }
@@ -30,7 +32,8 @@ function formularioEmBranco() {
     $arquivos['p12']['info'] = 'assinatura-fixa';
   }
   limpaPastas();
-  return require 'php/form.php';
+  require 'php/form.php';
+  exit();
 }
 
 function carregarArquivos() {
@@ -47,7 +50,6 @@ function carregarArquivos() {
 function validarArquivo($extensao) {
   $erros = '';
   if (isset($_FILES[$extensao])) {
-    
     if ($_FILES[$extensao]['size'] > 0) {
       if ((strcmp($_FILES[$extensao]['type'], 'application/pdf') == 0) &&
           (strcmp($_FILES[$extensao]['type'], 'application/x-pkcs12') == 0)) {
@@ -99,6 +101,9 @@ function verificarAssinatura($p12_upload_erros){
         excluirAssinatura();
         formularioEmBranco();
       }
+      //Não enviou arquivo e vai usar a fixa.
+      //Cria cópia da fixa para uso temporário.
+      shell_exec("cp " . getcwd() . "/signature/assinatura-fixa.p12 " . getcwd() . "/signature/assinatura.p12");
       return $arquivo;
     } else {
       //Não enviou arquivo e nem possui fixa, retorna os erros do upload.
@@ -132,13 +137,21 @@ function salvarArquivo($arquivo, $tipo, $nome = null){
   $pasta = 'upload';
   if ($tipo == 'p12') {
     $pasta = 'signature';
-  }
-  if($nome == null) {
+    if($nome == null) {
+      $nome = 'assinatura';
+    }
+  } else {
     $nome = substr(md5(rand().rand()), 0, 8);
   }
   $caminho = getcwd() . '/' . $pasta . '/' . $nome . '.' . $tipo;
   $sucesso = move_uploaded_file($arquivo['tmp_name'], $caminho);
   if ($sucesso) {
+    if ($nome == 'assinatura-fixa') {
+      //Caso o usuário salve uma assinatura fixa, o software cria uma cópia para uso na geração do pdf assinado.
+      //Esta cópia é necessária, pois o arquivo de configuração do pyhanko é fixo. Ou seja,
+      //cria a cópia, assina e deleta a cópia.
+      shell_exec("cp " . getcwd() . "/signature/assinatura-fixa.p12 " . getcwd() . "/signature/assinatura.p12");
+    }
     $status['filename'] = basename($nome);
   } else {
     $status['erros'] = 'Verifique se as permissões corretas das pastas de upload foram definidas.';
