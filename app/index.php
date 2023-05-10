@@ -50,23 +50,28 @@ function carregarArquivos() {
 function validarArquivo($extensao) {
   $erros = '';
   if (isset($_FILES[$extensao])) {
-    if ($_FILES[$extensao]['size'] > 0) {
-      if ((strcmp($_FILES[$extensao]['type'], 'application/pdf') == 0) &&
-          (strcmp($_FILES[$extensao]['type'], 'application/x-pkcs12') == 0)) {
-        $erros = "Extensão não permitida. Por favor, envie um arquivo $extensao.<br />";
-      }
-      if ($_FILES[$extensao]['size'] > 20000000) {
-        $erros .= 'O arquivo excede o limite de 20MB.<br />';
-      }
-      //Testando se o arquivo é válido
-      if (strcmp($_FILES[$extensao]['type'], 'application/pdf') == 0) {
-        $arquivo = file_get_contents($_FILES[$extensao]['tmp_name']);
-        if (!preg_match("/^%PDF-/", $arquivo)) {
-          $erros .= 'Arquivo PDF inválido! Revise seu arquivo e tente novamente.<br />';
-        }
+    if ($extensao == 'pdf') {
+      if ($_FILES['pdf']['size'] <= 0) {
+        return "Você não enviou o arquivo PDF.";
       }
     } else {
-      return "Você não enviou o arquivo $extensao.";
+      if ($_FILES['p12']['size'] <= 0) {
+        return FALSE;
+      }
+    }
+    if ((strcmp($_FILES[$extensao]['type'], 'application/pdf') == 0) &&
+        (strcmp($_FILES[$extensao]['type'], 'application/x-pkcs12') == 0)) {
+      $erros = "Extensão não permitida. Por favor, envie um arquivo $extensao.<br />";
+    }
+    if ($_FILES[$extensao]['size'] > 20000000) {
+      $erros .= 'O arquivo excede o limite de 20MB.<br />';
+    }
+    //Testando se o arquivo é válido
+    if (strcmp($_FILES[$extensao]['type'], 'application/pdf') == 0) {
+      $arquivo = file_get_contents($_FILES[$extensao]['tmp_name']);
+      if (!preg_match("/^%PDF-/", $arquivo)) {
+        $erros .= 'Arquivo PDF inválido! Revise seu arquivo e tente novamente.<br />';
+      }
     }
   } 
   return $erros;
@@ -90,6 +95,10 @@ function verificarAssinatura($p12_upload_erros){
     'info' => '',
     'erros' => ''
   );
+  if ($p12_upload_erros === FALSE) {
+    $arquivo['info'] = '0';
+    return $arquivo;
+  }
   if (isset($_POST['acao-assinatura'])) {
     $opcao = $_POST['acao-assinatura'];
   }

@@ -138,7 +138,10 @@ var PDFAnnotate = function (container_id, url, options = {}) {
       $(".fa-trash").prop("disabled", false);
       $(".fa-signature").prop("disabled", true);
       $(".fa-code").prop("disabled", false);
-      $(".fa-download").prop("disabled", false);
+      var ass_status = $("#pdf-container").attr("aria-signature");
+      if (ass_status != "0") {
+        $(".fa-download").prop("disabled", false);
+      }
     }
   };
 };

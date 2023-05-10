@@ -19,7 +19,8 @@
       <br>
       <div class="custom-file-upload">
         <label for="p12">
-          <?=($arquivos['p12']['info'] == "assinatura-fixa") ? "(Opcional) Alterar" : ""?>
+          (Opcional)
+          <?=($arquivos['p12']['info'] == "assinatura-fixa") ? " Alterar" : ""?>
           Assinatura Eletrônica:
         </label>
         <input type="file" name="p12" id="p12" accept="application/x-pkcs12">

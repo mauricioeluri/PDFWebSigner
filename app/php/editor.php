@@ -50,7 +50,7 @@
                 </div>
             </div>
         </nav>
-        <div id="pdf-container"></div>
+        <div id="pdf-container" aria-signature="<?=$arquivos['p12']['info']?>"></div>
         <div class="modal fade" id="dataModalSign" tabindex="-1" role="dialog" aria-labelledby="dataSignature" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
