@@ -75,6 +75,7 @@ Agora, é necessário instalar as bibliotecas Python:
 ### Configuração pyHanko
 
 Para a geração de PDFs assinados, é necessário configurar o arquivo:
+
 _assinador-pdf/app/signature/pyhanko.yml_
 
 As configurações deste arquivo, dizem respeito à formatação da assinatura e demais configurações como a senha da assinatura digital.
