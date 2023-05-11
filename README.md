@@ -35,7 +35,7 @@ Para rodar o container, instalar o resto das dependências e inicializar o Docke
 
     docker-compose up
 
-Pronto! Para acessar a aplicação, basta digitar localhost no seu navegador.
+Pronto! Para acessar a aplicação, basta acessar o localhost no seu navegador.
 
 ### Instalação em Linux
 
@@ -78,6 +78,6 @@ Para a geração de PDFs assinados, é necessário configurar o arquivo:
 
 _assinador-pdf/app/signature/pyhanko.yml_
 
-As configurações deste arquivo, dizem respeito à formatação da assinatura e demais configurações como a senha da assinatura digital.
+As configurações deste arquivo, dizem respeito à formatação da assinatura e demais configurações como a senha da assinatura digital. Há uma configuração prévia que foi carregada para demonstração. Para utilizá-la, basta alterar a senha de acordo com a senha de sua assinatura digital.
 
 Neste link é possível verificar a documentação oficial do pyHanko sobre este arquivo de configuração: [Configuration options — pyHanko 0.19.0-dev1 documentation](https://pyhanko.readthedocs.io/en/latest/cli-guide/config.html).
