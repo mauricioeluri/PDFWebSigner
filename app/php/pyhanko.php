@@ -2,9 +2,9 @@
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['pdf']) && isset($_POST['coordenadas']) ) {
         $comando = 'python3 pyhanko --verbose --config ../signature/pyhanko.yml sign addsig --field Sig1 --field ' .
-            $_POST['coordenadas'] . '/DLK-SIGNATURE pkcs12 --p12-setup p12dlk ../upload/' .
+            $_POST['coordenadas'] . '/default pkcs12 --p12-setup p12dlk ../upload/' .
             $_POST['pdf'] . '.pdf ../output/' . $_POST['pdf'] . '.pdf';
-        exec($comando, $output, $return_var);
+            exec($comando, $output, $return_var);
         if ($return_var == 0) {
             limpaPastas();
            header('Location: ../output/' . $_POST['pdf'] . '.pdf');
