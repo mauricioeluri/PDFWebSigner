@@ -4,18 +4,19 @@ Assinador de documentos PDF com assinatura eletrônica.
 
 ## 1. Objetivos
 
-Este software pode gerar coordenadas para o pyHanko ou gerar o PDF assinado.
-Software desenvolvido em javascript e PHP, com o objetivo de gerar coordenadas ou assinar um documento PDF, utilizando a biblioteca Python - Pyhanko.
+Software desenvolvido em PHP e Javascript que utiliza bibliotecas Python.
+Este software possui um editor que permite selecionar o lugar onde inserir uma assinatura digital em um documento PDF. Ele utiliza a biblioteca pyHanko do Python, e também têm a funcionalidade de gerar apenas as coordenadas para o pyHanko.
 
 ## 2. Forma de uso
 
-O software funciona de forma simples. Onde, na primeira tela é possível carregar o arquivo PDF que será utilizado, assim como a assinatura. No campo manter assinatura, é possível manter a assinatura salva para não precisar carregá-la a cada uso.
+Ma primeira tela é possível carregar o arquivo PDF que será utilizado e a assinatura digital (opcional). No campo manter assinatura, é possível manter a assinatura salva para não precisar carregá-la a cada uso.
 Depois, basta clicar em enviar e em seguida selecionar o local onde a assinatura será salva. Também é possível ajustar o tamanho da caixa da assinatura.
 Em seguida, basta selecionar se deseja apenas as coordenadas do pyHanko ou o PDF inteiro gerado com assinatura.
 
 ## 3. Configurações
 
-Este software requer uma máquina linux para ser instalado. Podendo ser instalado na máquina virtual, ou em um container Docker já configurado.
+Este software requer uma máquina linux para ser instalado. Podendo ser instalado na máquina virtual, ou em um container Docker.
+Caso queira instalar via Docker, pule para o item 3.1, caso deseja instalar manualmente em uma máquina virtual, pule para 3.2;
 
 ### 3.1 Instalação Docker
 
@@ -76,3 +77,9 @@ _assinador-pdf/app/signature/pyhanko.yml_
 As configurações deste arquivo, dizem respeito à formatação da assinatura e demais configurações como a senha da assinatura digital. Há uma configuração prévia que foi carregada para demonstração. Para utilizá-la, basta alterar a senha de acordo com a senha de sua assinatura digital.
 
 Neste link é possível verificar a documentação oficial do pyHanko sobre este arquivo de configuração: [Configuration options — pyHanko 0.19.0-dev1 documentation](https://pyhanko.readthedocs.io/en/latest/cli-guide/config.html).
+
+### 4 Outras informações - Assinaturas Digitais
+
+Assinaturas digitais são arquivos com extensão .p12, que geralmente podem ser obtidos através de instituições certificadoras ou até o governo federal em alguns casos. Estudantes de universidades públicas podem baixar seu certificado digital ICPEdu através do link: [https://pessoal.icpedu.rnp.br](https://pessoal.icpedu.rnp.br/home).
+
+
