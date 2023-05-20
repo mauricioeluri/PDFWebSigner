@@ -3,6 +3,6 @@ services:
   assinador-pdf-service:
     image: assinador-pdf
     ports:
-      - "80:80"
+      - "8888:80"
     volumes:
       - ./app:/var/www/html
