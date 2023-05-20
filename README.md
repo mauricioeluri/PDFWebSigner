@@ -24,11 +24,7 @@ Após baixar o repositório, certifique-se de ter o Docker instalado e rodando, 
 
 Abra o terminal (No Windows, é o Prompt de Comando), e navegue até a pasta em que a aplicação foi baixada.
 
-Dentro do repositório, rode o seguinte comando:
-
-    docker-compose up
-
-Para baixar a imagem Docker, digite o comando:
+Dentro do repositório, para baixar a imagem Docker, rode o seguinte comando:
 
     docker build -t assinador-pdf .
 
