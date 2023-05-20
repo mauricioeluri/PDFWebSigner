@@ -32,7 +32,7 @@ Para rodar o container, instalar o resto das dependências e inicializar o Docke
 
     docker-compose up
 
-Pronto! Para acessar a aplicação, basta acessar o localhost no seu navegador.
+Pronto! Para acessar a aplicação, basta acessar o localhost no seu navegador, na porta 8888.
 
 ### 3.2 Instalação em Linux
 
