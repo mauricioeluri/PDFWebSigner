@@ -1,10 +1,10 @@
-!/app/output
-app/output/*
-!/app/output/directory.txt
-
-!/app/signature
+# Assinaturas
 app/signature/*.p12
+# Arquivo contendo configurações e senha da assinatura
+app/signature/pyhanko.yml
 
-!/app/upload
+# Arquivos gerados
+app/output/*
+
+# Pasta de uploads
 app/upload/*
-!/app/upload/directory.txt

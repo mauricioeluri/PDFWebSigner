@@ -1,8 +1,12 @@
-version: "2"
+version: "3.9"
+name: assinador-pdf
 services:
-  assinador-pdf-service:
-    image: assinador-pdf
+  assinador-pdf:
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - "8888:80"
+      - 80:80
     volumes:
       - ./app:/var/www/html
+    working_dir: /var/www/html

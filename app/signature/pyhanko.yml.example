@@ -1,11 +1,11 @@
 pkcs12-setups:
   p12dlk:
     pfx-file: ../signature/assinatura.p12
-    pfx-passphrase: ADICIONE SUA SENHA AQUI
+    pfx-passphrase: <<SENHA DA ASSINATURA>>
 stamp-styles:
   default:
     type: text
-    background: ../signature/unihacker.png
+    background: ../signature/example.png
     stamp-text: "Assinado digitalmente por:\n%(signer)s\nEm: %(ts)s"
     timestamp_format: "%d/%m/%Y"
     background-opacity: 0.9

@@ -1,4 +1,4 @@
-FROM php:8.1-apache-bullseye
+FROM php:8.0.30-apache-bullseye
 ADD ./app /var/www/html
 EXPOSE 80
 
@@ -24,3 +24,9 @@ RUN sudo -Hu www-data pip3 install pyhanko
 RUN sudo -Hu www-data pip3 install image
 RUN sudo -Hu www-data pip3 install uharfbuzz 
 RUN sudo -Hu www-data pip3 install fontTools
+
+# Configurando nome do servidor apache
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+
+# Criando pastas que serão utilizadas pela aplicação
+RUN mkdir output upload
