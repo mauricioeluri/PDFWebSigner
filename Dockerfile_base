@@ -1,6 +1,4 @@
 FROM php:8.0.30-apache-bullseye
-ADD ./app /var/www/html
-EXPOSE 80
 
 # Atualizando pacotes
 RUN apt-get update
@@ -27,3 +25,9 @@ RUN sudo -Hu www-data pip3 install fontTools
 
 # Configurando nome do servidor apache
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+
+WORKDIR /pdfwebsigner
+
+ADD ./app /var/www/html
+
+EXPOSE 80
