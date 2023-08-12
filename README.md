@@ -26,7 +26,7 @@ Também será necessário compartilhar a pasta deste repositório com o Docker, 
 
 Abra o terminal (No Windows, é o Prompt de Comando) e navegue até a pasta em que a aplicação foi baixada, e em seguida digite o seguinte comando:
 
-    docker-compose up
+    docker compose up
 
 Pronto! Para acessar a aplicação, basta acessar o localhost no seu navegador.
 
