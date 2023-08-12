@@ -1,7 +1,7 @@
 version: "3.9"
 name: assinador
 services:
-  service:
+  php-apache:
     build:
       context: .
       dockerfile: Dockerfile
