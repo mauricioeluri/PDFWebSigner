@@ -1,5 +1,5 @@
 version: "3.9"
-name: assinador
+name: pdfwebsigner
 services:
   php-apache:
     build:
