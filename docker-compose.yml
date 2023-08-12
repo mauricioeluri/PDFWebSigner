@@ -1,7 +1,7 @@
 version: "3.9"
-name: assinador-pdf
+name: assinador
 services:
-  assinador-pdf:
+  service:
     build:
       context: .
       dockerfile: Dockerfile
