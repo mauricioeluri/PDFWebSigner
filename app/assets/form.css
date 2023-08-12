@@ -184,3 +184,14 @@ label,
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+.simple-link {
+  background-color: transparent;
+  color: white;
+  text-decoration: underline;
+  text-transform: initial;
+  margin: 0;
+  padding: 0;
+}
+.simple-link:hover {
+  background-color: transparent;
+}

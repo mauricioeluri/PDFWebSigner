@@ -23,7 +23,7 @@ function formularioEmBranco() {
       'erros' => ''
     ),
     'p12'   => array(
-      'info'  => '',
+      'info'  => verificaPyhankoYml(),
       'erros' => ''
     )
   );
@@ -34,6 +34,15 @@ function formularioEmBranco() {
   limpaPastas();
   require 'php/form.php';
   exit();
+}
+
+function verificaPyhankoYml(){
+  $pyhanko = file_exists(getcwd() . '/signature/pyhanko.yml');
+  $info = '';
+  if(!$pyhanko) {
+    $info = 'sem-config';
+  }
+  return $info;
 }
 
 function carregarArquivos() {
@@ -92,9 +101,13 @@ function verificarAssinatura($p12_upload_erros){
   $opcao = null;
   $ass_fixa = file_exists(getcwd().'/signature/assinatura-fixa.p12');
   $arquivo = array (
-    'info' => '',
+    'info' => verificaPyhankoYml(),
     'erros' => ''
   );
+  //Arquivo de configuração pyhanko não encontrado
+  if ($arquivo['info'] != '') {
+    return $arquivo;
+  }
   if ($p12_upload_erros === FALSE) {
     $arquivo['info'] = '0';
     return $arquivo;
@@ -102,7 +115,7 @@ function verificarAssinatura($p12_upload_erros){
   if (isset($_POST['acao-assinatura'])) {
     $opcao = $_POST['acao-assinatura'];
   }
-  //Se tem erro no upload, não tem arquivo, logo, se usa a fixa.
+  //Se tem erro no upload, não tem arquivo. Logo, se usa a fixa.
   if ($p12_upload_erros != '') {
     if ($ass_fixa) {
       $arquivo['info'] = 'assinatura-fixa';
@@ -153,6 +166,9 @@ function salvarArquivo($arquivo, $tipo, $nome = null){
     $nome = substr(md5(rand().rand()), 0, 8);
   }
   $caminho = getcwd() . '/' . $pasta . '/' . $nome . '.' . $tipo;
+  if (!is_dir(getcwd() . '/' . $pasta)) {
+    mkdir(getcwd() . '/' . $pasta);
+  }
   $sucesso = move_uploaded_file($arquivo['tmp_name'], $caminho);
   if ($sucesso) {
     if ($nome == 'assinatura-fixa') {
@@ -175,6 +191,6 @@ function salvarArquivo($arquivo, $tipo, $nome = null){
 */
 function limpaPastas() {
   shell_exec("find " . getcwd() . "/signature/*.p12 -type f -not -name 'assinatura-fixa.p12' -delete");
-  shell_exec("find " . getcwd() . "/upload/ -type f -not -name 'directory.txt' -delete");
-  shell_exec("find " . getcwd() . "/output/ -type f -not -name 'directory.txt' -delete");
+  shell_exec("find " . getcwd() . "/upload/ -type f -delete");
+  shell_exec("find " . getcwd() . "/output/ -type f -delete");
 }

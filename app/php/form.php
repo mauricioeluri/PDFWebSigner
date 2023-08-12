@@ -16,6 +16,14 @@
         <input type="file" name="pdf" id="pdf" accept="application/pdf">
       </div>
       <p class="alerta"><?=$arquivos['pdf']['erros']?></p>
+      <?php if($arquivos['p12']['info'] == "sem-config") { ?>
+        <p class="alerta">
+          Arquivo de configuração do pyhanko não encontrado.<br>
+          Para utilizar assinatura eletrônica, verifique as instruções no
+          <a href="https://github.com/mauricioeluri/assinador-pdf" class="simple-link">
+            repositório deste software
+          </a>.<br>
+      <?php } else { ?>
       <br>
       <div class="custom-file-upload">
         <label for="p12">
@@ -35,7 +43,7 @@
       <?php if($arquivos['p12']['info'] == "assinatura-fixa") { ?>
       <button type="button" class="file-upload-button submit btn-alerta" id="btn-excluir" onclick="excluir()">Excluir assinatura salva</button>
       <br><br><br><br>
-      <?php } ?>
+      <?php } } ?>
       <input type="submit" class="file-upload-button submit" value="Enviar">
     </form>
     <script src="assets/tools/jquery-3.5.1.min.js"></script>

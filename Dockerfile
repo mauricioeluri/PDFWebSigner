@@ -27,6 +27,3 @@ RUN sudo -Hu www-data pip3 install fontTools
 
 # Configurando nome do servidor apache
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
-
-# Criando pastas que serão utilizadas pela aplicação
-RUN mkdir output upload
